@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un jeu</title>
+</head>
+<body>
+
+    {% if id is not None %}
+        <form method="post" action="/ludotheque/updatetraitement_jeux/{{id}}/"/>
+    {% else %}
+        <form method="post" action="/ludotheque/traitement_jeux/"/>
+    {% endif %}
+    {% csrf_token %}
+    {{form.as_ul}}
+    <input type="submit" value="Envoyez les informations"/>
+</body>
+</html>

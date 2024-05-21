@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/ludotheque/ajout_listejeuxjoueurs/"> Ajouter une liste </a>
+<h1> Hey </h1>
+<article>
+    {% for ljj in liste %}
+        <li class="liste"> {{ljj}} <a class="edit" href="/ludotheque/affiche_listejeuxjoueurs/{{ljj.id}}/">Afficher les informations</a>  |  <a class="edit" href="/ludotheque/update_listejeuxjoueurs/{{ljj.id}}/">Mettre à jour</a>  |  <a class="edit" href="/ludotheque/delete_listejeuxjoueurs/{{ljj.id}}/">Supprimer</a> </li>
+    {% endfor %}
+</article>
+<a href="/ludotheque/"> Retour </a>
+</body>
+</html>

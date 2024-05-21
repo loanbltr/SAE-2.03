@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/ludotheque/ajout_categories/"> Ajouter une catégorie </a>
+<h1> Hey </h1>
+<article>
+    {% for c in liste %}
+        <li class="liste"> {{c}} <a class="edit" href="/ludotheque/affiche_categories/{{c.id}}/">Afficher les informations</a>  |  <a class="edit" href="/ludotheque/update_categories/{{c.id}}/">Mettre à jour</a>  |  <a class="edit" href="/ludotheque/delete_categories/{{c.id}}/">Supprimer</a> </li>
+    {% endfor %}
+</article>
+<a href="/ludotheque/"> Retour </a>
+</body>
+</html>

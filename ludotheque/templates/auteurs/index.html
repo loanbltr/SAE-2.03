@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/ludotheque/ajout_auteurs/"> Ajouter un auteur </a>
+<h1> Hey </h1>
+<article>
+    {% for a in liste %}
+        <li class="liste"> {{a}} <a class="edit" href="/ludotheque/affiche_auteurs/{{a.id}}/">Afficher les informations</a>  |  <a class="edit" href="/ludotheque/update_auteurs/{{a.id}}/">Mettre à jour</a>  |  <a class="edit" href="/ludotheque/delete_auteurs/{{a.id}}/">Supprimer</a> </li>
+    {% endfor %}
+</article>
+<a href="/ludotheque/"> Retour </a>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un auteur</title>
+</head>
+<body>
+
+    {% if id is not None %}
+        <form method="post" action="/ludotheque/updatetraitement_auteurs/{{id}}/"/>
+    {% else %}
+        <form method="post" action="/ludotheque/traitement_auteurs/"/>
+    {% endif %}
+    {% csrf_token %}
+    {{form.as_ul}}
+    <input type="submit" value="Envoyez les informations"/>
+</body>
+</html>

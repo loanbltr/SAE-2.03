@@ -1,8 +1,12 @@
 from django.urls import path
 from . import views, views_joueurs, views_auteurs, views_categories, views_jeux, views_commentaires, views_listejeuxjoueurs
 
+
 urlpatterns = [
-    path('', views.index),
+    path('check_permissions/', views.check_permissions),
+
+    path('', views.indexmain),
+    path('index/', views.index),
 
     path('index_joueurs/', views_joueurs.joueurs_index),
     path('ajout_joueurs/', views_joueurs.joueurs_ajout),

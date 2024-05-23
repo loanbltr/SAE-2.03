@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>{{jeux.titre}}</title>
-    {% load static %}
+    <title>{{ jeux.titre }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
 </head>
 <body>
+{% include 'main_nav.html' %}
 
-    <h1> {{ jeux.titre }}</h1>
-    <p> {{jeux.titre}} est le dieu des {{jeux.auteur}}</p>
+<div class="container">
+    {% if jeux.photo %}
+        <img src="{{ jeux.photo.url }}" class="imgAffiche">
+    {% else %}
+        <p>No image available</p>
+    {% endif %}
+    <div class="text">
+        <h1 class="nomJeu">{{ jeux.titre }}</h1>
+        <p class="auteur">{{ jeux.auteur.prenom }}</p>
+        <p class="datexedit">{{ jeux.editeur }}</p>
+    </div>
+
+    <p class="dateAffiche"> {{ jeux.anneeSortie }} </p>
+</div>
+
+<div class="infoAffiche">
+    <p> Nombre de joueurs: 100</p>
+    <p> Nombre de commentaires: 1000</p>
+</div>
 </body>
 </html>

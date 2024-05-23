@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Administrateur</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
+</head>
+<body>
+{% include 'main_nav.html' %}
+
+<h1 class="mainTitle"> Majin </h1>
+
+<div class="allJeux">
+    {% if liste %}
+        <div class="jeux-container">
+            {% for j in liste %}
+                <article class="mainJeux">
+                    <a href="{{ j.url }}" class="card-link">
+                        <div class="card">
+                            {% if j.photo %}
+                                <div class="top">
+                                    <img src="{{ j.photo.url }}" class="imgMain">
+                                </div>
+                            {% else %}
+                                <div class="top">
+                                    <p>Aucune image disponible</p>
+                                </div>
+                            {% endif %}
+                            <div class="bottom">
+                                <div class="name-category">
+                                    {{ j.titre }}<br>
+                                    Catégorie
+                                </div>
+                                <div class="line"></div>
+                                <div class="year">{{ j.anneeSortie }}</div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Aucun jeux n'est disponible pour le moment.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

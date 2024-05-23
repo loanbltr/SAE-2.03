@@ -5,7 +5,7 @@ class Categories(models.Model):
     desc = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        chaine = f"Voici la description de la catégorie {self.nom} : {self.desc}."
+        chaine = f"{self.nom}"
         return chaine
 
     def dico(self):
@@ -13,8 +13,8 @@ class Categories(models.Model):
 
 class Jeux(models.Model):
     titre = models.CharField(max_length=100)
-    anneeSortie = models.CharField(max_length=100)
-    photo = models.CharField(max_length=100, default='default.jpg')
+    anneeSortie = models.IntegerField()
+    photo = models.ImageField(upload_to='images/', blank=True, null=True)
     editeur = models.CharField(max_length=100)
     auteur = models.ForeignKey("Auteurs", on_delete=models.CASCADE, default=None)
     cat = models.ForeignKey("Categories", on_delete=models.CASCADE, default=None)

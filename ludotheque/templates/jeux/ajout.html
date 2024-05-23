@@ -8,9 +8,9 @@
 <body>
 
     {% if id is not None %}
-        <form method="post" action="/ludotheque/updatetraitement_jeux/{{id}}/"/>
+        <form method="post" enctype="multipart/form-data"/>
     {% else %}
-        <form method="post" action="/ludotheque/traitement_jeux/"/>
+        <form method="post" enctype="multipart/form-data"/>
     {% endif %}
     {% csrf_token %}
     {{form.as_ul}}

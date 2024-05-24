@@ -16,7 +16,7 @@ def jeux_ajout(request):
         if form.is_valid():
             jeux = form.save()
             jeux.save()
-            return render(request, "jeux/index.html", {"jeux": jeux})
+            return HttpResponseRedirect("/")
 
         else:
             return render(request, "jeux/ajout.html", {"form": form})
@@ -43,10 +43,30 @@ def resize_image(image_path):
         img = img.resize((50, 50), Image.LANCZOS)
         img.save(image_path)
 
+
+from django.db.models import Avg
+
+
 def jeux_affiche(request, id):
     jeux = get_object_or_404(Jeux, pk=id)
-    nbCommentaires = Commentaires.objects.filter(jeux=jeux).count()
-    return render(request, "jeux/affiche.html", {"jeux": jeux, "nbCommentaires": nbCommentaires})
+    listeCommentaires = Commentaires.objects.filter(jeux=jeux)
+    nbCommentaires = listeCommentaires.count()
+
+    averageRating = listeCommentaires.aggregate(Avg('note'))['note__avg']
+    if averageRating is None:
+        averageRating = 0
+
+    bestCommentaire = listeCommentaires.order_by('-note').first()
+    pireCommentaire = listeCommentaires.order_by('note').first()
+
+    return render(request, "jeux/affiche.html", {
+        "jeux": jeux,
+        "nbCommentaires": nbCommentaires,
+        "listeCommentaires": listeCommentaires,
+        "averageRating": averageRating,
+        "bestCommentaire": bestCommentaire,
+        "pireCommentaire": pireCommentaire,
+    })
 
 
 def jeux_update(request, id):
@@ -72,4 +92,4 @@ def jeux_updatetraitement(request, id):
 def jeux_delete(request, id):
     jeux = Jeux.objects.get(pk=id)
     jeux.delete()
-    return HttpResponseRedirect("/ludotheque/index_jeux/")
+    return HttpResponseRedirect("/")

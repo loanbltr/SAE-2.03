@@ -20,7 +20,7 @@ class Jeux(models.Model):
     cat = models.ForeignKey("Categories", on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        chaine = f"Voici la catégorie du jeu {self.titre} : {self.cat}."
+        chaine = f" {self.titre} "
         return chaine
 
     def dico(self):
@@ -33,7 +33,7 @@ class Auteurs(models.Model):
     photo = models.CharField(max_length=100, default='default.jpg')
 
     def __str__(self):
-        chaine = f"Voici lâge de l'auteur {self.nom} {self.prenom} : {self.age}."
+        chaine = f"{self.nom} {self.prenom}"
         return chaine
 
     def dico(self):
@@ -51,7 +51,7 @@ class Joueurs(models.Model):
     type = models.CharField(max_length=20, choices=TYPE_CHOICES)
 
     def __str__(self):
-        chaine = f"Voici le mail du joueur {self.nom} {self.prenom} : {self.mail}."
+        chaine = f"{self.nom} {self.prenom} "
         return chaine
 
     def dico(self):
@@ -65,7 +65,7 @@ class Commentaires(models.Model):
     date = models.DateField(blank=True, null=False)
 
     def __str__(self):
-        chaine = f"Voici le commentaire du joueur {self.joueurs} sur le jeu {self.jeux} : {self.commentaire}."
+        chaine = f"Commentaire du joueur {self.joueurs} sur le jeu {self.jeux}"
         return chaine
 
     def dico(self):

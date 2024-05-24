@@ -176,3 +176,100 @@ nav a:hover {
     transform: scale(1.05);
     cursor: pointer;
 }
+
+.listeCommentaires {
+    border: 0px solid;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 10px;
+    background-color: rgb(56, 134, 140, 0.3);
+    padding: 2%;
+}
+
+.commentaire {
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    width: 90%; /* Use 90% of the parent container's width */
+    margin: 0 auto; /* Center the comment box */
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.commentaire p {
+    margin: 0;
+}
+
+.header, .footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.joueurCommentaires {
+    font-weight: bold;
+}
+
+.noteCommentaires {
+    text-align: right;
+}
+
+/* New styles for best and worst comments */
+.BPCommentaires {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 10%;
+}
+
+.bestCommentaires, .pireCommentaires {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(56, 134, 140, 0.3);
+    width: 45%; /* Adjust width to fit side by side */
+}
+
+.bestCommentaires p, .pireCommentaires p {
+    margin: 5px 0;
+}
+
+.bestCommentaires .header, .pireCommentaires .header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bestCommentaires .footer, .pireCommentaires .footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bestCommentaires .joueurCommentaires, .pireCommentaires .joueurCommentaires {
+    font-weight: bold;
+}
+
+.bestCommentaires .noteCommentaires, .pireCommentaires .noteCommentaires {
+    text-align: right;
+}
+
+.liste, .listeEdit {
+    text-align: center;
+}
+
+.liste{
+    font-size: 25px;
+}
+
+.listeJeuxAll {
+    margin-top: 8%;
+}
+
+.infoEdit {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    display: flex;
+    justify-content: space-around;
+    border: 2px solid;
+    background-color: rgb(56, 134, 140, 0.5);
+}

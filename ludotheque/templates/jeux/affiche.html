@@ -27,13 +27,58 @@
 <div class="infoAffiche">
     <p> Nombre de joueurs: 100</p>
     <p> Nombre de commentaires: {{ nbCommentaires }}</p>
+    <p> Note moyenne: {{ averageRating|floatformat:1 }} / 10</p>
 </div>
-<article class="bestCommentaires">
-    <p>Commentaires 1</p>
+
+<article class="BPCommentaires">
+    <article class="bestCommentaires">
+        <div class="header">
+            <p>Meilleur commentaire :</p>
+        </div>
+        {% if bestCommentaire %}
+            <div class="content">
+                <p class="joueurCommentaires">{{ bestCommentaire.joueurs.nom }} :</p>
+                <p>{{ bestCommentaire.commentaire }}</p>
+                <p class="noteCommentaires">{{ bestCommentaire.note }} / 10</p>
+            </div>
+        {% else %}
+            <p>Pas de commentaire disponible</p>
+        {% endif %}
+    </article>
+    <article class="pireCommentaires">
+        <div class="header">
+            <p>Pire commentaire :</p>
+        </div>
+        {% if pireCommentaire %}
+            <div class="content">
+                <p class="joueurCommentaires">{{ pireCommentaire.joueurs.nom }} :</p>
+                <p>{{ pireCommentaire.commentaire }}</p>
+                <p class="noteCommentaires">{{ pireCommentaire.note }} / 10</p>
+            </div>
+        {% else %}
+            <p>Pas de commentaire disponible</p>
+        {% endif %}
+    </article>
 </article>
-<article class="pireCommentaires">
-    <p>Commentaire 2</p> <br>
-</article>
-<a class="addCommentaireAffiche" href="/ludotheque/ajout_commentaires/"> Ajouter un commentaire </a>
+
+
+<div class="listeCommentaires">
+    {% for commentaire in listeCommentaires %}
+        <article class="commentaire">
+            <p class="joueurCommentaires">{{ commentaire.joueurs.nom }} :</p>
+            <p class="commentairesCommentaires">{{ commentaire.commentaire }}</p>
+            <p class="noteCommentaires">{{ commentaire.note }} / 10</p>
+            <p class="dateCommentaires"> {{ commentaire.date }}</p>
+        </article>
+    {% endfor %}
+</div>
+
+<a class="addCommentaireAffiche" href="/ajout_commentaires/"> Ajouter un commentaire </a>
+
+<div class="infoEdit">
+    <a href="/update_jeux/{{jeux.id}}/">Mettre à jour</a>
+    <a href="/delete_jeux/{{jeux.id}}/">Supprimer</a>
+
+</div>
 </body>
 </html>

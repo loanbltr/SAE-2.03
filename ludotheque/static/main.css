@@ -76,7 +76,6 @@ nav a:hover {
 }
 
 .infoAffiche {
-    position: fixed;
     width: 80%;
     text-align: center;
     padding: 10px;
@@ -147,22 +146,29 @@ nav a:hover {
     padding: 20px;
 }
 
-.card .name-category {
-    color: red;
-    font-size: 20px;
-    margin: 10px 0;
+.card .nameCardMain {
+    color: black;
+    font-size: 25px;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.card .categorycardMain {
+    color: rgb(86, 80, 80, 0.8);
+    font-size: 12px;
+    margin: 0;
 }
 
 .card .line {
     width: 50px;
     height: 2px;
-    background-color: red;
+    background-color: black;
     margin: 10px auto;
 }
 
 .card .year {
-    color: red;
-    font-size: 24px;
+    color: black;
+    font-size: 16px;
     margin-top: 20px;
 }
 

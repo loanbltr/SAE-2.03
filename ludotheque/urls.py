@@ -35,7 +35,7 @@ urlpatterns = [
     path('index_jeux/', views_jeux.jeux_index),
     path('ajout_jeux/', views_jeux.jeux_ajout),
     path('traitement_jeux/', views_jeux.jeux_traitement),
-    path('affiche_jeux/<int:id>/', views_jeux.jeux_affiche),
+    path('affiche_jeux/<int:id>/', views_jeux.jeux_affiche, name='affiche_jeux'),
     path('update_jeux/<int:id>/', views_jeux.jeux_update),
     path('updatetraitement_jeux/<int:id>/', views_jeux.jeux_updatetraitement),
     path('delete_jeux/<int:id>/', views_jeux.jeux_delete),

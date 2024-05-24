@@ -16,7 +16,7 @@
         <div class="jeux-container">
             {% for j in liste %}
                 <article class="mainJeux">
-                    <a href="{{ j.url }}" class="card-link">
+                    <a href="{% url 'affiche_jeux' j.id %}" class="card-link">
                         <div class="card">
                             {% if j.photo %}
                                 <div class="top">
@@ -28,10 +28,8 @@
                                 </div>
                             {% endif %}
                             <div class="bottom">
-                                <div class="name-category">
-                                    {{ j.titre }}<br>
-                                    Catégorie
-                                </div>
+                                <p class="nameCardMain">{{ j.titre }}</p>
+                                <p class="categorycardMain">{{ j.cat }}</p>
                                 <div class="line"></div>
                                 <div class="year">{{ j.anneeSortie }}</div>
                             </div>

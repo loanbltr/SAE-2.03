@@ -1,13 +1,13 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from .forms import JeuxForm
-from . import models
+from .models import Jeux, Commentaires
 from PIL import Image
 import os
 from django.conf import settings
 
 # Create your views here.
 def jeux_index(request):
-    liste = list(models.Jeux.objects.all())
+    liste = list(Jeux.objects.all())
     return render(request, "jeux/index.html", {"liste" : liste})
 
 def jeux_ajout(request):
@@ -44,11 +44,13 @@ def resize_image(image_path):
         img.save(image_path)
 
 def jeux_affiche(request, id):
-    jeux = models.Jeux.objects.get(pk=id)
-    return render(request, "jeux/affiche.html", {"jeux": jeux})
+    jeux = get_object_or_404(Jeux, pk=id)
+    nbCommentaires = Commentaires.objects.filter(jeux=jeux).count()
+    return render(request, "jeux/affiche.html", {"jeux": jeux, "nbCommentaires": nbCommentaires})
+
 
 def jeux_update(request, id):
-    liste = models.Jeux.objects.get(pk=id)
+    liste = Jeux.objects.get(pk=id)
     form = JeuxForm(liste.__dict__)
     return render(request, "jeux/ajout.html", {"form":form, "id": id})
 
@@ -68,6 +70,6 @@ def jeux_updatetraitement(request, id):
         return render(request, "jeux/ajout.html", {"form": jform, "id": id})
 
 def jeux_delete(request, id):
-    jeux = models.Jeux.objects.get(pk=id)
+    jeux = Jeux.objects.get(pk=id)
     jeux.delete()
     return HttpResponseRedirect("/ludotheque/index_jeux/")

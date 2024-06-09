@@ -1,13 +1,25 @@
 <!DOCTYPE html>
-<htm lang="en">
+<html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>{{auteurs.nom}}</title>
-    {% load static %}
+    <title>Auteur : {{ auteurs.nom }} {{ auteurs.prenom }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
 </head>
 <body>
+{% include 'main_nav.html' %}
 
-    <h1> {{ auteurs.nom }}</h1>
-    <p> {{auteurs.nom}} est l'auteur des jeux {{auteurs.prenom}}</p>
+<div class="containerSecond">
+    <h1 class="mainTitle">Fiche de l'auteur : {{ auteurs.nom }} {{ auteurs.prenom }}</h1>
+
+    <article class="playerInfo">
+        <h2>Informations personnelles</h2>
+        <p><strong>Nom:</strong> {{ auteurs.nom }}</p>
+        <p><strong>Prénom:</strong> {{ auteurs.prenom }}</p>
+        <p><strong>Âge:</strong> {{ auteurs.age }}</p>
+        <p><strong>Photo:</strong> <img src="{% static auteurs.photo.url %}" class="imgAffiche2"></p>
+    </article>
+</div>
+
 </body>
-</htm>
+</html>

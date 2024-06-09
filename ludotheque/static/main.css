@@ -256,7 +256,7 @@ nav a:hover {
     text-align: center;
 }
 
-.liste{
+.liste {
     font-size: 25px;
 }
 
@@ -272,4 +272,169 @@ nav a:hover {
     justify-content: space-around;
     border: 2px solid;
     background-color: rgb(56, 134, 140, 0.5);
+}
+
+.mainTitle {
+    margin-top: 6%;
+    text-align: center;
+    font-size: 60px;
+}
+
+.containerSecond {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.addButton, .backButton {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: rgb(56, 134, 140);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.addButton:hover, .backButton:hover {
+    background-color: rgb(40, 100, 104);
+}
+
+.playerList {
+    width: 80%;
+    background-color: rgba(56, 134, 140, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.playerItem {
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.playerName {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.playerActions a {
+    text-decoration: none;
+    color: rgb(56, 134, 140);
+    font-size: 16px;
+}
+
+.playerActions a:hover {
+    font-weight: bold;
+}
+
+.playerInfo, .playerComments {
+    width: 80%;
+    background-color: rgba(56, 134, 140, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.playerInfo h2, .playerComments h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.playerInfo p, .playerComments p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.commentItem {
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    margin: 10px 0;
+}
+
+.playerForm {
+    width: 80%;
+    background-color: rgba(56, 134, 140, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.playerForm ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.playerForm li {
+    margin: 10px 0;
+}
+
+.submitButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: rgb(56, 134, 140);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+    background-color: rgb(40, 100, 104);
+}
+
+.categoryList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 80%;
+    background-color: rgba(56, 134, 140, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.categoryItem {
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    font-size: 14px; /* Smaller font size */
+}
+
+.categoryName {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.categoryActions a {
+    text-decoration: none;
+    color: rgb(56, 134, 140);
+    font-size: 14px; /* Smaller font size */
+}
+
+.categoryActions a:hover {
+    font-weight: bold;
+}
+
+.imgAffiche {
+    width: 15%;
+    height: auto;
+    border-radius: 10px;
+    margin: 6% 0 6% 6%;
 }

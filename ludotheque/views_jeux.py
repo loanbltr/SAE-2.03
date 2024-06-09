@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from .forms import JeuxForm
 from .models import Jeux, Commentaires
 from PIL import Image
+from django.db.models import Avg
 import os
 from django.conf import settings
 
@@ -17,7 +18,6 @@ def jeux_ajout(request):
             jeux = form.save()
             jeux.save()
             return HttpResponseRedirect("/")
-
         else:
             return render(request, "jeux/ajout.html", {"form": form})
     else:
@@ -33,19 +33,14 @@ def jeux_traitement(request):
         if jeux.photo:
             resize_image(jeux.photo.path)
 
-        return HttpResponseRedirect("/ludotheque/index_jeux/")
+        return HttpResponseRedirect("/index_jeux/")
     else:
         return render(request, "jeux/ajout.html", {"form": jform})
-
 
 def resize_image(image_path):
     with Image.open(image_path) as img:
         img = img.resize((50, 50), Image.LANCZOS)
         img.save(image_path)
-
-
-from django.db.models import Avg
-
 
 def jeux_affiche(request, id):
     jeux = get_object_or_404(Jeux, pk=id)
@@ -85,7 +80,7 @@ def jeux_updatetraitement(request, id):
         if jeux.photo:
             resize_image(jeux.photo.path)
 
-        return HttpResponseRedirect("/ludotheque/index_jeux/")
+        return HttpResponseRedirect("/index_jeux/")
     else:
         return render(request, "jeux/ajout.html", {"form": jform, "id": id})
 

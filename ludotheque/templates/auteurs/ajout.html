@@ -4,16 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un auteur</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
 </head>
 <body>
-
+{% include 'main_nav.html' %}
+<div class="containerSecond">
+<h1 class="mainTitle">Ajouter un auteur</h1>
     {% if id is not None %}
-        <form method="post" action="/ludotheque/updatetraitement_auteurs/{{id}}/"/>
+        <form class="playerForm" method="post" action="/updatetraitement_auteurs/{{id}}/"/>
     {% else %}
-        <form method="post" action="/ludotheque/traitement_auteurs/"/>
+        <form class="playerForm" method="post" action="/traitement_auteurs/"/>
     {% endif %}
     {% csrf_token %}
     {{form.as_ul}}
     <input type="submit" value="Envoyez les informations"/>
+</div>
 </body>
 </html>

@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import AuteursForm
 from . import models
+from PIL import Image
+from django.db.models import Avg
 
 # Create your views here.
 def auteurs_index(request):
@@ -9,9 +11,10 @@ def auteurs_index(request):
 
 def auteurs_ajout(request):
     if request.method == "POST":
-        form = AuteursForm(request)
+        form = AuteursForm(request.POST, request.FILES)
         if form.is_valid():
             auteurs = form.save()
+            auteurs.save()
             return render(request, "auteurs/affiche.html", {"auteurs": auteurs})
 
         else:
@@ -22,12 +25,20 @@ def auteurs_ajout(request):
 
 
 def auteurs_traitement(request):
-    aform = AuteursForm(request.POST)
+    aform = AuteursForm(request.POST, request.FILES)
     if aform.is_valid():
         auteurs = aform.save()
-        return HttpResponseRedirect("/ludotheque/index_auteurs/")
+        if auteurs.photo:
+            resize_image(auteurs.photo.path)
+
+        return HttpResponseRedirect("/index_auteurs/")
     else:
         return render(request, "auteurs/ajout.html", {"form": aform})
+
+def resize_image(image_path):
+    with Image.open(image_path) as img:
+        img = img.resize((50, 50), Image.LANCZOS)
+        img.save(image_path)
 
 def auteurs_affiche(request, id):
     auteurs = models.Auteurs.objects.get(pk=id)
@@ -39,16 +50,16 @@ def auteurs_update(request, id):
     return render(request, "auteurs/ajout.html", {"form":form, "id": id})
 
 def auteurs_updatetraitement(request, id):
-    aform = AuteursForm(request.POST)
+    aform = AuteursForm(request.POST, request.FILES)
     if aform.is_valid():
         auteurs = aform.save(commit = False)
         auteurs.id = id
         auteurs.save()
-        return HttpResponseRedirect("/ludotheque/index_auteurs/")
+        return HttpResponseRedirect("/index_auteurs/")
     else:
         return render(request, "auteurs/ajout.html", {"form": aform, "id":id})
 
 def auteurs_delete(request, id):
     auteurs = models.Auteurs.objects.get(pk=id)
     auteurs.delete()
-    return HttpResponseRedirect("/ludotheque/index_auteurs/")
+    return HttpResponseRedirect("/index_auteurs/")

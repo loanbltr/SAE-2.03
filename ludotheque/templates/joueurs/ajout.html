@@ -4,16 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un joueur</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
 </head>
 <body>
+{% include 'main_nav.html' %}
+<div class="containerSecond">
+    <h1 class="mainTitle">Ajouter un joueur</h1>
 
     {% if id is not None %}
-        <form method="post" action="/ludotheque/updatetraitement_joueurs/{{id}}/"/>
+        <form class="playerForm" method="post" action="/updatetraitement_joueurs/{{id}}/">
     {% else %}
-        <form method="post" action="/ludotheque/traitement_joueurs/"/>
+        <form class="playerForm" method="post" action="/traitement_joueurs/">
     {% endif %}
-    {% csrf_token %}
-    {{form.as_ul}}
-    <input type="submit" value="Envoyez les informations"/>
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input class="submitButton" type="submit" value="Envoyez les informations"/>
+    </form>
+</div>
+
 </body>
 </html>

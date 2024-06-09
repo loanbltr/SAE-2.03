@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>{{joueurs.nom}}</title>
-    {% load static %}
+    <title>Joueur : {{ joueur.nom }} {{ joueur.prenom }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
 </head>
 <body>
+{% include 'main_nav.html' %}
 
-    <h1> {{ joueurs.nom }}</h1>
-    <p> {{joueurs.nom}} est le dieu des {{joueurs.prenom}}</p>
+<div class="containerSecond">
+    <h1 class="mainTitle">Fiche du joueur : {{ joueur.nom }} {{ joueur.prenom }}</h1>
+
+    <article class="playerInfo">
+        <h2>Informations personnelles</h2>
+        <p><strong>Nom:</strong> {{ joueur.nom }}</p>
+        <p><strong>Prénom:</strong> {{ joueur.prenom }}</p>
+        <p><strong>Mail:</strong> {{ joueur.mail }}</p>
+        <p><strong>Mot de passe:</strong> {{ joueur.mdp }}</p>
+        <p><strong>Type de joueur:</strong> {{ joueur.type }}</p>
+    </article>
+
+    <article class="playerComments">
+        <h2>Liste de ses commentaires</h2>
+        <ul>
+        {% for commentaire in commentaires %}
+            <li class="commentItem">
+                <p><strong>Jeu:</strong> {{ commentaire.jeux }}</p>
+                <p><strong>Note:</strong> {{ commentaire.note }} / 10</p>
+                <p><strong>Commentaire:</strong> {{ commentaire.commentaire }}</p>
+                <p><strong>Date:</strong> {{ commentaire.date }}</p>
+            </li>
+        {% empty %}
+            <p>Ce joueur n'a pas encore de commentaires.</p>
+        {% endfor %}
+        </ul>
+    </article>
+</div>
+
 </body>
 </html>

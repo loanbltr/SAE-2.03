@@ -30,7 +30,7 @@ class Auteurs(models.Model):
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
     age = models.CharField(max_length=100)
-    photo = models.CharField(max_length=100, default='default.jpg')
+    photo = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self):
         chaine = f"{self.nom} {self.prenom}"

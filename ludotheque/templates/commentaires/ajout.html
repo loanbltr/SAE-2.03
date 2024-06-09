@@ -8,9 +8,9 @@
 <body>
 
     {% if id is not None %}
-        <form method="post" action="/ludotheque/updatetraitement_commentaires/{{id}}/"/>
+        <form method="post" action="/updatetraitement_commentaires/{{id}}/"/>
     {% else %}
-        <form method="post" action="/ludotheque/traitement_commentaires/"/>
+        <form method="post" action="/traitement_commentaires/"/>
     {% endif %}
     {% csrf_token %}
     {{form.as_ul}}

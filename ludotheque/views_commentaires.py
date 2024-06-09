@@ -25,7 +25,7 @@ def commentaires_traitement(request):
     cform = CommentairesForm(request.POST)
     if cform.is_valid():
         commentaires = cform.save()
-        return HttpResponseRedirect("/ludotheque/index_commentaires/")
+        return HttpResponseRedirect("/index_commentaires/")
     else:
         return render(request, "commentaires/ajout.html", {"form": cform})
 
@@ -44,11 +44,11 @@ def commentaires_updatetraitement(request, id):
         commentaires = cform.save(commit = False)
         commentaires.id = id
         commentaires.save()
-        return HttpResponseRedirect("/ludotheque/index_commentaires/")
+        return HttpResponseRedirect("/index_commentaires/")
     else:
         return render(request, "commentaires/ajout.html", {"form": cform, "id":id})
 
 def commentaires_delete(request, id):
     commentaires = models.Commentaires.objects.get(pk=id)
     commentaires.delete()
-    return HttpResponseRedirect("/ludotheque/index_commentaires/")
+    return HttpResponseRedirect("/index_commentaires/")

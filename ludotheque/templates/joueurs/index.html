@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Liste joueurs</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
 </head>
 <body>
-<a href="/ludotheque/ajout_joueurs/"> Ajouter un joueur </a>
-<h1> Hey </h1>
-<article>
-    {% for j in liste %}
-        <li class="liste"> {{j}} <a class="edit" href="/ludotheque/affiche_joueurs/{{j.id}}/">Afficher les informations</a>  |  <a class="edit" href="/ludotheque/update_joueurs/{{j.id}}/">Mettre à jour</a>  |  <a class="edit" href="/ludotheque/delete_joueurs/{{j.id}}/">Supprimer</a> </li>
-    {% endfor %}
-</article>
-<a href="/ludotheque/"> Retour </a>
+{% include 'main_nav.html' %}
+
+<div class="containerSecond">
+    <h1 class="mainTitle">Liste des joueurs</h1>
+    <a class="addButton" href="/ajout_joueurs/">Ajouter un nouveau joueur</a>
+    <article class="playerList">
+        {% for j in liste %}
+            <div class="playerItem">
+                <p class="playerName">{{ j }}</p>
+                <div class="playerActions">
+                    <a class="edit" href="/affiche_joueurs/{{ j.id }}">Afficher les informations</a> |
+                    <a class="edit" href="/update_joueurs/{{ j.id }}">Mettre à jour</a> |
+                    <a class="edit" href="/delete_joueurs/{{ j.id }}">Supprimer</a>
+                </div>
+            </div>
+        {% endfor %}
+    </article>
+    <a class="backButton" href="/ludotheque/">Retour</a>
+</div>
 </body>
 </html>

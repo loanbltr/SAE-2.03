@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Liste des catégories</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
 </head>
 <body>
-<a href="/ludotheque/ajout_categories/"> Ajouter une catégorie </a>
-<h1> Hey </h1>
-<article>
-    {% for c in liste %}
-        <li class="liste"> {{c}} <a class="edit" href="/ludotheque/affiche_categories/{{c.id}}/">Afficher les informations</a>  |  <a class="edit" href="/ludotheque/update_categories/{{c.id}}/">Mettre à jour</a>  |  <a class="edit" href="/ludotheque/delete_categories/{{c.id}}/">Supprimer</a> </li>
-    {% endfor %}
-</article>
-<a href="/ludotheque/"> Retour </a>
+{% include 'main_nav.html' %}
+
+<div class="containerSecond">
+    <h1 class="mainTitle">Liste des catégories</h1>
+    <a class="addButton" href="/ajout_categories/">Ajouter une nouvelle catégorie</a>
+    <article class="categoryList">
+        {% for c in liste %}
+            <div class="categoryItem">
+                <p class="categoryName">{{ c.nom }}</p>
+                <div class="categoryActions">
+                    <a class="edit" href="/affiche_categories/{{ c.id }}">Afficher</a> |
+                    <a class="edit" href="/update_categories/{{ c.id }}">Mettre à jour</a> |
+                    <a class="edit" href="/delete_categories/{{ c.id }}">Supprimer</a>
+                </div>
+            </div>
+        {% endfor %}
+    </article>
+    <a class="backButton" href="/ludotheque/">Retour</a>
+</div>
 </body>
 </html>

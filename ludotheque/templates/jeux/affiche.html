@@ -37,7 +37,7 @@
         </div>
         {% if bestCommentaire %}
             <div class="content">
-                <p class="joueurCommentaires">{{ bestCommentaire.joueurs.nom }} :</p>
+                <p class="joueurCommentaires">{{ bestCommentaire.joueurs.nom }} ({{ joueurs.type }}):</p>
                 <p>{{ bestCommentaire.commentaire }}</p>
                 <p class="noteCommentaires">{{ bestCommentaire.note }} / 10</p>
             </div>

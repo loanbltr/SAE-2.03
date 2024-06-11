@@ -2,16 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Liste des Jeux et Joueurs</title>
 </head>
 <body>
-<a href="/ludotheque/ajout_listejeuxjoueurs/"> Ajouter une liste </a>
-<h1> Hey </h1>
-<article>
-    {% for ljj in liste %}
-        <li class="liste"> {{ljj}} <a class="edit" href="/ludotheque/affiche_listejeuxjoueurs/{{ljj.id}}/">Afficher les informations</a>  |  <a class="edit" href="/ludotheque/delete_listejeuxjoueurs/{{ljj.id}}/">Supprimer</a> </li>
-    {% endfor %}
-</article>
-<a href="/ludotheque/"> Retour </a>
+    <h1>Liste des Jeux et Joueurs</h1>
+    <ul>
+        {% for liste in liste_jeux_joueurs %}
+            <li>
+                <h2>Jeux:</h2>
+                <ul>
+                    {% for jeu in liste.jeux.all %}
+                        <li>{{ jeu.titre }} ({{ jeu.anneeSortie }})</li>
+                    {% endfor %}
+                </ul>
+                <h2>Joueurs:</h2>
+                <ul>
+                    {% for joueur in liste.joueurs.all %}
+                        <li>{{ joueur.nom }} {{ joueur.prenom }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

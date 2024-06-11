@@ -11,13 +11,14 @@
 <div class="containerSecond">
 <h1 class="mainTitle">Ajouter un auteur</h1>
     {% if id is not None %}
-        <form class="playerForm" method="post" action="/updatetraitement_auteurs/{{id}}/"/>
+        <form method="post" enctype="multipart/form-data"/>
     {% else %}
-        <form class="playerForm" method="post" action="/traitement_auteurs/"/>
+        <form method="post" enctype="multipart/form-data"/>
     {% endif %}
     {% csrf_token %}
     {{form.as_ul}}
     <input type="submit" value="Envoyez les informations"/>
+{% include 'main_footer.html' %}
 </div>
 </body>
 </html>

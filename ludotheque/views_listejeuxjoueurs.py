@@ -29,9 +29,9 @@ def listejeuxjoueurs_traitement(request):
     else:
         return render(request, "listejeuxjoueurs/ajout.html", {"form": ljjform})
 
-def listejeuxjoueurs_affiche(request, id):
-    listejeuxjoueurs = models.ListeJeuxJoueurs.objects.get(pk=id)
-    return render(request, "listejeuxjoueurs/affiche.html", {"listejeuxjoueurs": listejeuxjoueurs})
+def listejeuxjoueurs_affiche(request):
+    liste_jeux_joueurs = models.ListeJeuxJoueurs.objects.all()
+    return render(request, 'listejeuxjoueurs/index.html', {'liste_jeux_joueurs': liste_jeux_joueurs})
 
 def listejeuxjoueurs_update(request, id):
     liste = models.ListeJeuxJoueurs.objects.get(pk=id)

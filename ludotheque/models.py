@@ -72,8 +72,8 @@ class Commentaires(models.Model):
         return {'jeux': self.jeux, 'joueurs':self.joueurs, 'note':self.note, 'commentaire':self.commentaire, 'date':self.date}
 
 class ListeJeuxJoueurs(models.Model):
-    jeux = models.ForeignKey("Jeux", on_delete=models.CASCADE, default=None)
-    joueurs = models.ForeignKey("Joueurs", on_delete=models.CASCADE, default=None)
+    jeux = models.ManyToManyField("Jeux")
+    joueurs = models.ManyToManyField("Joueurs")
     def __str__(self):
         chaine = f"Voici la liste des jeux du joueur {self.joueurs} : {self.jeux}."
         return chaine

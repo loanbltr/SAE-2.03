@@ -25,7 +25,7 @@ def categories_traitement(request):
     cform = CategoriesForm(request.POST)
     if cform.is_valid():
         categories = cform.save()
-        return HttpResponseRedirect("/ludotheque/index_categories/")
+        return HttpResponseRedirect("/index_categories/")
     else:
         return render(request, "categories/ajout.html", {"form": cform})
 
@@ -44,11 +44,11 @@ def categories_updatetraitement(request, id):
         categories = cform.save(commit = False)
         categories.id = id
         categories.save()
-        return HttpResponseRedirect("/ludotheque/index_categories/")
+        return HttpResponseRedirect("/index_categories/")
     else:
         return render(request, "categories/ajout.html", {"form": cform, "id":id})
 
 def categories_delete(request, id):
     categories = models.Categories.objects.get(pk=id)
     categories.delete()
-    return HttpResponseRedirect("/ludotheque/index_categories/")
+    return HttpResponseRedirect("/index_categories/")

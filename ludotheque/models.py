@@ -60,7 +60,7 @@ class Joueurs(models.Model):
 class Commentaires(models.Model):
     jeux = models.ForeignKey("Jeux", on_delete=models.CASCADE, default=None)
     joueurs = models.ForeignKey("Joueurs", on_delete=models.CASCADE, default=None)
-    note = models.CharField(max_length=100)
+    note = models.FloatField(max_length=3)
     commentaire = models.TextField(blank=True, null=True)
     date = models.DateField(blank=True, null=False)
 

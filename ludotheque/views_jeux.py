@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from .forms import JeuxForm
-from .models import Jeux, Commentaires
+from .models import Jeux, Commentaires, Joueurs
 from PIL import Image
 from django.db.models import Avg
 import os
@@ -33,7 +33,7 @@ def jeux_traitement(request):
         if jeux.photo:
             resize_image(jeux.photo.path)
 
-        return HttpResponseRedirect("/index_jeux/")
+        return HttpResponseRedirect("/")
     else:
         return render(request, "jeux/ajout.html", {"form": jform})
 
@@ -42,14 +42,23 @@ def resize_image(image_path):
         img = img.resize((50, 50), Image.LANCZOS)
         img.save(image_path)
 
+from django.db.models import Avg
+
 def jeux_affiche(request, id):
     jeux = get_object_or_404(Jeux, pk=id)
     listeCommentaires = Commentaires.objects.filter(jeux=jeux)
     nbCommentaires = listeCommentaires.count()
 
-    averageRating = listeCommentaires.aggregate(Avg('note'))['note__avg']
-    if averageRating is None:
-        averageRating = 0
+    commentaires_pro = listeCommentaires.filter(joueurs__type='professionnel')
+    commentaires_particulier = listeCommentaires.filter(joueurs__type='particulier')
+
+    averageRatingPro = commentaires_pro.aggregate(Avg('note'))['note__avg']
+    averageRatingParticulier = commentaires_particulier.aggregate(Avg('note'))['note__avg']
+
+    if averageRatingPro is None:
+        averageRatingPro = "NN"
+    if averageRatingParticulier is None:
+        averageRatingParticulier = "NN"
 
     bestCommentaire = listeCommentaires.order_by('-note').first()
     pireCommentaire = listeCommentaires.order_by('note').first()
@@ -57,12 +66,12 @@ def jeux_affiche(request, id):
     return render(request, "jeux/affiche.html", {
         "jeux": jeux,
         "nbCommentaires": nbCommentaires,
-        "listeCommentaires": listeCommentaires,
-        "averageRating": averageRating,
+        "averageRatingPro": averageRatingPro,
+        "averageRatingParticulier": averageRatingParticulier,
         "bestCommentaire": bestCommentaire,
         "pireCommentaire": pireCommentaire,
+        "listeCommentaires": listeCommentaires,  # Directly pass the list of comments
     })
-
 
 def jeux_update(request, id):
     liste = Jeux.objects.get(pk=id)
@@ -80,7 +89,7 @@ def jeux_updatetraitement(request, id):
         if jeux.photo:
             resize_image(jeux.photo.path)
 
-        return HttpResponseRedirect("/index_jeux/")
+        return HttpResponseRedirect("/")
     else:
         return render(request, "jeux/ajout.html", {"form": jform, "id": id})
 

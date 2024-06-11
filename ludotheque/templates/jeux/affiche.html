@@ -27,7 +27,8 @@
 <div class="infoAffiche">
     <p> Nombre de joueurs: 100</p>
     <p> Nombre de commentaires: {{ nbCommentaires }}</p>
-    <p> Note moyenne: {{ averageRating|floatformat:1 }} / 10</p>
+    <p> Note moyenne (Part) : {{ averageRatingParticulier|floatformat:1 }} / 10</p>
+    <p> Note moyenne (Pro) : {{ averageRatingPro|floatformat:1 }} / 10</p>
 </div>
 
 <article class="BPCommentaires">
@@ -37,7 +38,11 @@
         </div>
         {% if bestCommentaire %}
             <div class="content">
-                <p class="joueurCommentaires">{{ bestCommentaire.joueurs.nom }} ({{ joueurs.type }}):</p>
+                {% if bestCommentaire.joueurs.type == 'professionnel' %}
+                    <p class="joueurCommentaires">{{ bestCommentaire.joueurs.nom }} (Pro):</p>
+                {% else %}
+                    <p class="joueurCommentaires">{{ bestCommentaire.joueurs.nom }} (Part):</p>
+                {% endif %}
                 <p>{{ bestCommentaire.commentaire }}</p>
                 <p class="noteCommentaires">{{ bestCommentaire.note }} / 10</p>
             </div>
@@ -51,7 +56,11 @@
         </div>
         {% if pireCommentaire %}
             <div class="content">
-                <p class="joueurCommentaires">{{ pireCommentaire.joueurs.nom }} :</p>
+                {% if pireCommentaire.joueurs.type == 'professionnel' %}
+                    <p class="joueurCommentaires">{{ pireCommentaire.joueurs.nom }} (Pro) :</p>
+                {% else %}
+                    <p class="joueurCommentaires">{{ pireCommentaire.joueurs.nom }} (Part) :</p>
+                {% endif %}
                 <p>{{ pireCommentaire.commentaire }}</p>
                 <p class="noteCommentaires">{{ pireCommentaire.note }} / 10</p>
             </div>
@@ -61,11 +70,14 @@
     </article>
 </article>
 
-
 <div class="listeCommentaires">
     {% for commentaire in listeCommentaires %}
         <article class="commentaire">
-            <p class="joueurCommentaires">{{ commentaire.joueurs.nom }} :</p>
+            {% if commentaire.joueurs.type == 'professionnel' %}
+                <p class="joueurCommentaires">{{ commentaire.joueurs.nom }} (Pro) :</p>
+            {% else %}
+                <p class="joueurCommentaires">{{ commentaire.joueurs.nom }} (Part) :</p>
+            {% endif %}
             <p class="commentairesCommentaires">{{ commentaire.commentaire }}</p>
             <p class="noteCommentaires">{{ commentaire.note }} / 10</p>
             <p class="dateCommentaires"> {{ commentaire.date }}</p>
@@ -80,5 +92,6 @@
     <a href="/delete_jeux/{{jeux.id}}/">Supprimer</a>
 
 </div>
+{% include 'main_footer.html' %}
 </body>
 </html>

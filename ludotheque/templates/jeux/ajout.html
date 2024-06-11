@@ -4,16 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un jeu</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
 </head>
 <body>
+{% include 'main_nav.html' %}
+<div class="containerSecond">
+    <h1 class="mainTitle">Ajouter un jeu</h1>
 
     {% if id is not None %}
         <form method="post" enctype="multipart/form-data"/>
     {% else %}
         <form method="post" enctype="multipart/form-data"/>
     {% endif %}
-    {% csrf_token %}
-    {{form.as_ul}}
-    <input type="submit" value="Envoyez les informations"/>
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input class="submitButton" type="submit" value="Envoyez les informations"/>
+    </form>
+</div>
+{% include 'main_footer.html' %}
 </body>
 </html>

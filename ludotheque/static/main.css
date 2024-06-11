@@ -418,8 +418,13 @@ nav a:hover {
 }
 
 .categoryName {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
+}
+
+.categoryDesc{
+    font-size: 12px;
+    margin-top: -10px;
 }
 
 .categoryActions a {
@@ -437,4 +442,19 @@ nav a:hover {
     height: auto;
     border-radius: 10px;
     margin: 6% 0 6% 6%;
+}
+
+
+footer {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(56, 134, 140, 0.5);
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    bottom: 0;
+    width: 99.9%;
+    font-size: 10px;
+    margin-top: 30px;
 }

@@ -17,7 +17,12 @@
         <p><strong>Nom:</strong> {{ auteurs.nom }}</p>
         <p><strong>Prénom:</strong> {{ auteurs.prenom }}</p>
         <p><strong>Âge:</strong> {{ auteurs.age }}</p>
-        <p><strong>Photo:</strong> <img src="{% static auteurs.photo.url %}" class="imgAffiche2"></p>
+        <p><strong>Photo:</strong> class="imgAffiche2"></p>
+        {% if auteurs.photo %}
+            <img src="{{ jeux.photo.url }}" class="imgAffiche">
+        {% else %}
+             <p>No image available</p>
+        {% endif %}
     </article>
 </div>
 

@@ -16,15 +16,15 @@
         {% for c in liste %}
             <div class="categoryItem">
                 <p class="categoryName">{{ c.nom }}</p>
+                <p class="categoryDesc">{{ c.desc }}</p>
                 <div class="categoryActions">
-                    <a class="edit" href="/affiche_categories/{{ c.id }}">Afficher</a> |
                     <a class="edit" href="/update_categories/{{ c.id }}">Mettre à jour</a> |
                     <a class="edit" href="/delete_categories/{{ c.id }}">Supprimer</a>
                 </div>
             </div>
         {% endfor %}
     </article>
-    <a class="backButton" href="/ludotheque/">Retour</a>
+    <a class="backButton" href="/">Retour</a>
 </div>
 </body>
 </html>

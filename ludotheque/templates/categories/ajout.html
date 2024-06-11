@@ -4,16 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajouter une catégorie</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}"/>
 </head>
 <body>
+{% include 'main_nav.html' %}
+<div class="containerSecond">
+    <h1 class="mainTitle">Ajouter une catégorie</h1>
 
     {% if id is not None %}
-        <form method="post" action="/ludotheque/updatetraitement_categories/{{id}}/"/>
+        <form class="playerForm" method="post" action="/updatetraitement_categories/{{id}}/">
     {% else %}
-        <form method="post" action="/ludotheque/traitement_categories/"/>
+        <form class="playerForm" method="post" action="/traitement_categories/">
     {% endif %}
-    {% csrf_token %}
-    {{form.as_ul}}
-    <input type="submit" value="Envoyez les informations"/>
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input class="submitButton" type="submit" value="Envoyez les informations"/>
+    </form>
+</div>
 </body>
 </html>

@@ -81,8 +81,8 @@
             <p class="commentairesCommentaires">{{ commentaire.commentaire }}</p>
             <p class="noteCommentaires">{{ commentaire.note }} / 10</p>
             <p class="dateCommentaires"> {{ commentaire.date }}</p>
-            <a href="update_commentaires/{{ commentaire.id }}/"> Editer </a>
-            <a href="delete_commentaires/{{ commentaire.id }}/"> Supprimer </a>
+            <a href="../../update_commentaires/{{ commentaire.id }}/"> Editer </a>
+            <a href="../../delete_commentaires/{{ commentaire.id }}/"> Supprimer </a>
         </article>
     {% endfor %}
 </div>
@@ -103,11 +103,11 @@
         {% for jeuxjoueurs in liste %}
             <li class="commentItem">
                 <p> {{ jeuxjoueurs.joueurs.nom }} {{ jeuxjoueurs.joueurs.prenom }}</p>
-                <a href="../../affiche_joueurs/{{jeuxjoueurs.joueurs.id}}/"> Afficher </a>
+                <a href="/affiche_joueurs/{{jeuxjoueurs.joueurs.id}}/"> Afficher </a>
                 <a href="/delete_listejeuxjoueurs/{{jeuxjoueurs.id}}/{{jeux.id}}/"> Supprimer </a>
             </li>
         {% empty %}
-            <p>Ce joueur n'a pas encore de commentaires.</p>
+            <p>Personne ne possède ce jeu pour le moment.</p>
         {% endfor %}
         </ul>
     </article>

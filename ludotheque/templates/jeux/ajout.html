@@ -11,11 +11,7 @@
 <div class="containerSecond">
     <h1 class="mainTitle">Ajouter un jeu</h1>
 
-    {% if id is not None %}
         <form method="post" enctype="multipart/form-data"/>
-    {% else %}
-        <form method="post" enctype="multipart/form-data"/>
-    {% endif %}
         {% csrf_token %}
         {{ form.as_ul }}
         <input class="submitButton" type="submit" value="Envoyez les informations"/>

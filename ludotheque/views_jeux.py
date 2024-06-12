@@ -75,7 +75,7 @@ def jeux_affiche(request, id):
 
 def jeux_update(request, id):
     liste = Jeux.objects.get(pk=id)
-    form = JeuxForm(liste.__dict__)
+    form = JeuxForm(instance=liste)
     return render(request, "jeux/ajout.html", {"form":form, "id": id})
 
 

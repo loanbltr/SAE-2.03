@@ -25,7 +25,7 @@ def listejeuxjoueurs_traitement(request):
     ljjform = ListeJeuxJoueursForm(request.POST)
     if ljjform.is_valid():
         listejeuxjoueurs = ljjform.save()
-        return HttpResponseRedirect("/ludotheque/index_listejeuxjoueurs/")
+        return HttpResponseRedirect("/index_listejeuxjoueurs/")
     else:
         return render(request, "listejeuxjoueurs/ajout.html", {"form": ljjform})
 
@@ -35,7 +35,7 @@ def listejeuxjoueurs_affiche(request):
 
 def listejeuxjoueurs_update(request, id):
     liste = models.ListeJeuxJoueurs.objects.get(pk=id)
-    form = ListeJeuxJoueursForm(liste.__dict__)
+    form = ListeJeuxJoueursForm(instance=liste)
     return render(request, "listejeuxjoueurs/ajout.html", {"form":form, "id": id})
 
 def listejeuxjoueurs_updatetraitement(request, id):
@@ -44,11 +44,11 @@ def listejeuxjoueurs_updatetraitement(request, id):
         listejeuxjoueurs = ljjform.save(commit = False)
         listejeuxjoueurs.id = id
         listejeuxjoueurs.save()
-        return HttpResponseRedirect("/ludotheque/index_listejeuxjoueurs/")
+        return HttpResponseRedirect("/index_listejeuxjoueurs/")
     else:
         return render(request, "listejeuxjoueurs/ajout.html", {"form": ljjform, "id":id})
 
 def listejeuxjoueurs_delete(request, id):
     listejeuxjoueurs = models.ListeJeuxJoueurs.objects.get(pk=id)
     listejeuxjoueurs.delete()
-    return HttpResponseRedirect("/ludotheque/index_listejeuxjoueurs/")
+    return HttpResponseRedirect("/index_listejeuxjoueurs/")

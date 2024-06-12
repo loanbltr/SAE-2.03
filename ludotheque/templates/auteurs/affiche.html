@@ -17,16 +17,15 @@
         <p><strong>Nom:</strong> {{ auteurs.nom }}</p>
         <p><strong>Prénom:</strong> {{ auteurs.prenom }}</p>
         <p><strong>Âge:</strong> {{ auteurs.age }}</p>
-        <p><strong>Photo:</strong> class="imgAffiche2"></p>
+        <p><strong>Photo:</strong></p>
         {% if auteurs.photo %}
-            <img src="{{ jeux.photo.url }}" class="imgAffiche">
+            <img src="{{ auteurs.photo.url }}">
         {% else %}
              <p>No image available</p>
         {% endif %}
     </article>
 <a class="backButton" href="/index_auteurs">Retour</a>
-{% include 'main_footer.html' %}
 </div>
-
+{% include 'main_footer.html' %}
 </body>
 </html>

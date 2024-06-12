@@ -11,6 +11,24 @@ class Categories(models.Model):
     def dico(self):
         return {'nom': self.nom, 'desc':self.desc}
 
+class Joueurs(models.Model):
+    nom = models.CharField(max_length=100)
+    prenom = models.CharField(max_length=100)
+    mail = models.CharField(max_length=100)
+    mdp = models.CharField(max_length=100)
+    TYPE_CHOICES = (
+        ('professionnel', 'Professionnel'),
+        ('particulier', 'Particulier'),
+    )
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+
+    def __str__(self):
+        chaine = f"{self.nom} {self.prenom} "
+        return chaine
+
+    def dico(self):
+        return {'nom': self.nom, 'prenom':self.prenom, 'mail':self.mail, 'mdp':self.mdp, 'type':self.type}
+
 class Jeux(models.Model):
     titre = models.CharField(max_length=100)
     anneeSortie = models.IntegerField()
@@ -18,6 +36,7 @@ class Jeux(models.Model):
     editeur = models.CharField(max_length=100)
     auteur = models.ForeignKey("Auteurs", on_delete=models.CASCADE, default=None)
     cat = models.ForeignKey("Categories", on_delete=models.CASCADE, default=None)
+    joueurs = models.ManyToManyField(Joueurs, through='ListeJeuxJoueurs')
 
     def __str__(self):
         chaine = f" {self.titre} "
@@ -39,24 +58,6 @@ class Auteurs(models.Model):
     def dico(self):
         return {'nom': self.nom, 'prenom':self.prenom, 'age':self.age, 'photo':self.photo}
 
-class Joueurs(models.Model):
-    nom = models.CharField(max_length=100)
-    prenom = models.CharField(max_length=100)
-    mail = models.CharField(max_length=100)
-    mdp = models.CharField(max_length=100)
-    TYPE_CHOICES = (
-        ('professionnel', 'Professionnel'),
-        ('particulier', 'Particulier'),
-    )
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
-
-    def __str__(self):
-        chaine = f"{self.nom} {self.prenom} "
-        return chaine
-
-    def dico(self):
-        return {'nom': self.nom, 'prenom':self.prenom, 'mail':self.mail, 'mdp':self.mdp, 'type':self.type}
-
 class Commentaires(models.Model):
     jeux = models.ForeignKey("Jeux", on_delete=models.CASCADE, default=None)
     joueurs = models.ForeignKey("Joueurs", on_delete=models.CASCADE, default=None)
@@ -72,8 +73,8 @@ class Commentaires(models.Model):
         return {'jeux': self.jeux, 'joueurs':self.joueurs, 'note':self.note, 'commentaire':self.commentaire, 'date':self.date}
 
 class ListeJeuxJoueurs(models.Model):
-    jeux = models.ManyToManyField("Jeux")
-    joueurs = models.ManyToManyField("Joueurs")
+    jeux = models.ForeignKey("Jeux", on_delete=models.CASCADE, null=True)
+    joueurs = models.ForeignKey("Joueurs", on_delete=models.CASCADE, null=True)
     def __str__(self):
         chaine = f"Voici la liste des jeux du joueur {self.joueurs} : {self.jeux}."
         return chaine

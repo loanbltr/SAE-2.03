@@ -46,7 +46,7 @@ def auteurs_affiche(request, id):
 
 def auteurs_update(request, id):
     liste = models.Auteurs.objects.get(pk=id)
-    form = AuteursForm(liste.__dict__)
+    form = AuteursForm(instance=liste)
     return render(request, "auteurs/ajout.html", {"form":form, "id": id})
 
 def auteurs_updatetraitement(request, id):

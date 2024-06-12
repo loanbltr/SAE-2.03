@@ -41,7 +41,7 @@ def joueurs_affiche(request, id):
 
 def joueurs_update(request, id):
     liste = models.Joueurs.objects.get(pk=id)
-    form = JoueursForm(liste.__dict__)
+    form = JoueursForm(instance=liste)
     return render(request, "joueurs/ajout.html", {"form":form, "id": id})
 
 def joueurs_updatetraitement(request, id):
@@ -62,11 +62,16 @@ def joueurs_delete(request, id):
 def export_orders(request, id):
     joueurs_infos = models.Joueurs.objects.get(pk=id)
     commentaires = models.Commentaires.objects.filter(joueurs=joueurs_infos)
+    liste_jeux = models.ListeJeuxJoueurs.objects.filter(joueurs=joueurs_infos)
 
     buffer = io.BytesIO()
     p = canvas.Canvas(buffer, pagesize=letter)
 
-    p.drawString(100, 750, f"Informations de {joueurs_infos.nom} {joueurs_infos.prenom}")
+    p.setFont("Helvetica", 23)
+
+    p.drawString(100, 750, f"Commentaires de {joueurs_infos.nom} {joueurs_infos.prenom}")
+
+    p.setFont("Helvetica", 14)
 
     y_position = 700
     for commentaire in commentaires:
@@ -78,10 +83,22 @@ def export_orders(request, id):
         p.drawString(200, y_position, f"Note: {note}")
         p.drawString(300, y_position, f"Commentaire: {commentaire_text}")
 
+        y_position -= 60  # Augmenter cette valeur pour augmenter l'espacement entre les éléments
+
+    p.setFont("Helvetica", 23)
+    p.drawString(100, y_position, f"Liste des jeux de {joueurs_infos.nom} {joueurs_infos.prenom}")
+    y_position -= 40
+    p.setFont("Helvetica", 14)
+
+    for jeu in liste_jeux:
+        jeu = jeu.jeux
+
+        p.drawString(100, y_position, f" • {jeu.titre}")
+
         y_position -= 20
 
     p.showPage()
     p.save()
 
     buffer.seek(0)
-    return FileResponse(buffer, as_attachment=True, filename=f"joueurs_{id}.pdf")
+    return FileResponse(buffer, as_attachment=True, filename=f"{joueurs_infos.nom}{joueurs_infos.prenom}_{id}.pdf")

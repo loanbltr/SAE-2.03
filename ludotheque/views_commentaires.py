@@ -35,7 +35,7 @@ def commentaires_affiche(request, id):
 
 def commentaires_update(request, id):
     liste = models.Commentaires.objects.get(pk=id)
-    form = CommentairesForm(liste.__dict__)
+    form = CommentairesForm(instance=liste)
     return render(request, "commentaires/ajout.html", {"form":form, "id": id})
 
 def commentaires_updatetraitement(request, id):

@@ -8,9 +8,9 @@
 <body>
 
     {% if id is not None %}
-        <form method="post" action="/ludotheque/updatetraitement_listejeuxjoueurs/{{id}}/"/>
-    {% else %}
-        <form method="post" action="/ludotheque/traitement_listejeuxjoueurs/"/>
+        <form method="post" action="/updatetraitement_listejeuxjoueurs/{{id}}/">
+    {% elif id_j is not None %}
+        <form method="post" action="/traitement_listejeuxjoueurs/{{id_j}}/">
     {% endif %}
     {% csrf_token %}
     {{form.as_ul}}

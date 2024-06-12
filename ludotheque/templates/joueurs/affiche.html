@@ -36,6 +36,19 @@
         {% endfor %}
         </ul>
     </article>
+
+    <article class="playerComments">
+        <h2>Liste de ses jeux</h2>
+        <ul>
+        {% for jeux in listejeux %}
+            <li class="gamesItem">
+                <p><strong>Jeu:</strong> {{ jeux.jeux.titre }}</p>
+            </li>
+        {% empty %}
+            <p>Ce joueur n'a pas encore de commentaires.</p>
+        {% endfor %}
+        </ul>
+    </article>
 </div>
 <a class="backButton" href="/index_joueurs">Retour</a>
 {% include 'main_footer.html' %}

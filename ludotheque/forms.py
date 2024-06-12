@@ -63,8 +63,7 @@ class CommentairesForm(ModelForm):
 class ListeJeuxJoueursForm(ModelForm):
     class Meta:
         model = models.ListeJeuxJoueurs
-        fields = ('jeux', 'joueurs')
+        fields = ('joueurs',)
         labels = {
-            'jeux' : _('Jeux'),
             'joueurs' : _('Joueurs'),
         }

@@ -25,7 +25,7 @@
 </div>
 
 <div class="infoAffiche">
-    <p> Nombre de joueurs: 100</p>
+    <p> Nombre de joueurs: {{nombre_joueurs}}</p>
     <p> Nombre de commentaires: {{ nbCommentaires }}</p>
     <p> Note moyenne (Part) : {{ averageRatingParticulier|floatformat:1 }} / 10</p>
     <p> Note moyenne (Pro) : {{ averageRatingPro|floatformat:1 }} / 10</p>
@@ -92,6 +92,25 @@
     <a href="/delete_jeux/{{jeux.id}}/">Supprimer</a>
 
 </div>
+
+<a class="addButton" href="/ajout_listejeuxjoueurs/{{jeux.id}}"> Affecter un jouer à {{ jeux.titre }} </a>
+
+<article class="playerComments">
+    <h3>Liste des joueurs possédant le jeu</h3>
+        <ul>
+        {% for jeuxjoueurs in liste %}
+            <li class="commentItem">
+                <p> {{ jeuxjoueurs.joueurs.nom }} {{ jeuxjoueurs.joueurs.prenom }}</p>
+                <a href="/affiche_joueurs/{{jeuxjoueurs.joueurs.id}}/">~ Lire </a>
+    <a href="/delete_listejeuxjoueurs/{{jeuxjoueurs.id}}/{{jeux.id}}/">~ Delete </a>
+            </li>
+        {% empty %}
+            <p>Ce joueur n'a pas encore de commentaires.</p>
+        {% endfor %}
+        </ul>
+    </article>
+
 {% include 'main_footer.html' %}
+
 </body>
 </html>

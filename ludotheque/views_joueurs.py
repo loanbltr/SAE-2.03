@@ -1,6 +1,10 @@
 from django.shortcuts import render, HttpResponseRedirect
-from .forms import JoueursForm
+from django.http import HttpResponse, FileResponse
+from .forms import JoueursForm, CommentairesForm
 from . import models
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+import io
 
 # Create your views here.
 def joueurs_index(request):
@@ -31,8 +35,9 @@ def joueurs_traitement(request):
 
 def joueurs_affiche(request, id):
     joueur = models.Joueurs.objects.get(pk=id)
+    listejeux = list(models.ListeJeuxJoueurs.objects.filter(joueurs_id=id))
     commentaires = models.Commentaires.objects.filter(joueurs=joueur)
-    return render(request, "joueurs/affiche.html", {"joueur": joueur, "commentaires": commentaires})
+    return render(request, "joueurs/affiche.html", {"joueur": joueur, "commentaires": commentaires, 'listejeux': listejeux})
 
 def joueurs_update(request, id):
     liste = models.Joueurs.objects.get(pk=id)
@@ -53,3 +58,30 @@ def joueurs_delete(request, id):
     joueurs = models.Joueurs.objects.get(pk=id)
     joueurs.delete()
     return HttpResponseRedirect("/index_joueurs/")
+
+def export_orders(request, id):
+    joueurs_infos = models.Joueurs.objects.get(pk=id)
+    commentaires = models.Commentaires.objects.filter(joueurs=joueurs_infos)
+
+    buffer = io.BytesIO()
+    p = canvas.Canvas(buffer, pagesize=letter)
+
+    p.drawString(100, 750, f"Informations de {joueurs_infos.nom} {joueurs_infos.prenom}")
+
+    y_position = 700
+    for commentaire in commentaires:
+        jeu = commentaire.jeux
+        note = commentaire.note
+        commentaire_text = commentaire.commentaire
+
+        p.drawString(100, y_position, f"Jeu: {jeu.titre}")
+        p.drawString(200, y_position, f"Note: {note}")
+        p.drawString(300, y_position, f"Commentaire: {commentaire_text}")
+
+        y_position -= 20
+
+    p.showPage()
+    p.save()
+
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename=f"joueurs_{id}.pdf")

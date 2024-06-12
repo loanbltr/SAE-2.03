@@ -19,7 +19,7 @@
         <p><strong>Âge:</strong> {{ auteurs.age }}</p>
         <p><strong>Photo:</strong></p>
         {% if auteurs.photo %}
-            <img src="{{ auteurs.photo.url }}">
+            <img src="{{ auteurs.photo.url }}" class="imgAffiche">
         {% else %}
              <p>No image available</p>
         {% endif %}

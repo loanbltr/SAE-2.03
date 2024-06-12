@@ -49,10 +49,13 @@ urlpatterns = [
     path('delete_commentaires/<int:id>/', views_commentaires.commentaires_delete),
 
     path('index_listejeuxjoueurs/', views_listejeuxjoueurs.listejeuxjoueurs_index),
-    path('ajout_listejeuxjoueurs/', views_listejeuxjoueurs.listejeuxjoueurs_ajout),
-    path('traitement_listejeuxjoueurs/', views_listejeuxjoueurs.listejeuxjoueurs_traitement),
+    path('ajout_listejeuxjoueurs/<int:id>/', views_listejeuxjoueurs.listejeuxjoueurs_ajout),
+    path('traitement_listejeuxjoueurs/<int:id>/', views_listejeuxjoueurs.listejeuxjoueurs_traitement),
     path('affiche_listejeuxjoueurs/<int:id>/', views_listejeuxjoueurs.listejeuxjoueurs_affiche),
     path('update_listejeuxjoueurs/<int:id>/', views_listejeuxjoueurs.listejeuxjoueurs_update),
     path('updatetraitement_listejeuxjoueurs/<int:id>/', views_listejeuxjoueurs.listejeuxjoueurs_updatetraitement),
-    path('delete_listejeuxjoueurs/<int:id>/', views_listejeuxjoueurs.listejeuxjoueurs_delete),
+    path('delete_listejeuxjoueurs/<int:id>/<int:jeux_id>/', views_listejeuxjoueurs.listejeuxjoueurs_delete),
+
+    path('joueurs/export/<int:id>/', views_joueurs.export_orders),
+    path('import_product/', views.import_product, name='import_product'),
     ]

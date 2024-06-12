@@ -19,7 +19,8 @@
                 <div class="playerActions">
                     <a class="edit" href="/affiche_joueurs/{{ j.id }}">Afficher les informations</a> |
                     <a class="edit" href="/update_joueurs/{{ j.id }}">Mettre à jour</a> |
-                    <a class="edit" href="/delete_joueurs/{{ j.id }}">Supprimer</a>
+                    <a class="edit" href="/delete_joueurs/{{ j.id }}">Supprimer</a> |
+                    <a href="/joueurs/export/{{ j.id }}" class="pdf">PDF</a>
                 </div>
             </div>
         {% endfor %}

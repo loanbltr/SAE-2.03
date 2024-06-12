@@ -43,6 +43,14 @@
     {% endif %}
 </div>
 <a class="addButton" href="/ajout_jeux/"> Ajouter un jeu </a>
+
+    <div class="form-group">
+        <label for="myfile" class="sr-only">Importer des produits (CSV)</label>
+        <input type="file" name="myfile" id="myfile" class="form-control-file mr-2">
+    </div>
+    <button type="submit" class="btn btn-secondary">Importer</button>
+
+
 {% include 'main_footer.html' %}
 </body>
 </html>

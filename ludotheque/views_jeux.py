@@ -5,6 +5,7 @@ from PIL import Image
 from django.db.models import Avg
 import os
 from django.conf import settings
+from . import models
 
 # Create your views here.
 def jeux_index(request):
@@ -46,11 +47,14 @@ from django.db.models import Avg
 
 def jeux_affiche(request, id):
     jeux = get_object_or_404(Jeux, pk=id)
+    liste = list(models.ListeJeuxJoueurs.objects.filter(jeux_id=id))
     listeCommentaires = Commentaires.objects.filter(jeux=jeux)
     nbCommentaires = listeCommentaires.count()
 
     commentaires_pro = listeCommentaires.filter(joueurs__type='professionnel')
     commentaires_particulier = listeCommentaires.filter(joueurs__type='particulier')
+
+    nombre_joueurs = len(liste)
 
     averageRatingPro = commentaires_pro.aggregate(Avg('note'))['note__avg']
     averageRatingParticulier = commentaires_particulier.aggregate(Avg('note'))['note__avg']
@@ -70,7 +74,9 @@ def jeux_affiche(request, id):
         "averageRatingParticulier": averageRatingParticulier,
         "bestCommentaire": bestCommentaire,
         "pireCommentaire": pireCommentaire,
-        "listeCommentaires": listeCommentaires,  # Directly pass the list of comments
+        "listeCommentaires": listeCommentaires,
+        "liste": liste,
+        "nombre_joueurs": nombre_joueurs,
     })
 
 def jeux_update(request, id):
